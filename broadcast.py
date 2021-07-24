@@ -17,7 +17,7 @@ def broadcast(broadcast_data):
 
     for table in TABLES:
         data = {
-            "table": table,
+            "table": table['table'],
             "start": broadcast_data.get("start"),
         }
         message_json = json.dumps(data)
