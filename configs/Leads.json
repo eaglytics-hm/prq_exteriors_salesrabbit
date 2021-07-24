@@ -1,0 +1,112 @@
+{
+    "keys": {
+        "p_key": ["id"],
+        "incre_key": "statusModified"
+    },
+    "schema": [
+        {
+            "name": "id",
+            "type": "INTEGER"
+        },
+        {
+            "name": "userName",
+            "type": "STRING"
+        },
+        {
+            "name": "userId",
+            "type": "INTEGER"
+        },
+        {
+            "name": "firstName",
+            "type": "STRING"
+        },
+        {
+            "name": "lastName",
+            "type": "STRING"
+        },
+        {
+            "name": "phonePrimary",
+            "type": "STRING"
+        },
+        {
+            "name": "phoneAlternate",
+            "type": "STRING"
+        },
+        {
+            "name": "email",
+            "type": "STRING"
+        },
+        {
+            "name": "street1",
+            "type": "STRING"
+        },
+        {
+            "name": "street2",
+            "type": "STRING"
+        },
+        {
+            "name": "city",
+            "type": "STRING"
+        },
+        {
+            "name": "state",
+            "type": "STRING"
+        },
+        {
+            "name": "zip",
+            "type": "STRING"
+        },
+        {
+            "name": "country",
+            "type": "STRING"
+        },
+        {
+            "name": "latitude",
+            "type": "FLOAT"
+        },
+        {
+            "name": "longitude",
+            "type": "FLOAT"
+        },
+        {
+            "name": "status",
+            "type": "STRING"
+        },
+        {
+            "name": "notes",
+            "type": "STRING"
+        },
+        {
+            "name": "customFields",
+            "type": "STRING"
+        },
+        {
+            "name": "businessName",
+            "type": "STRING"
+        },
+        {
+            "name": "appointment",
+            "type": "STRING"
+        },
+        {
+            "name": "integrationData",
+            "type": "STRING"
+        },
+        {
+            "name": "statusModified",
+            "type": "TIMESTAMP"
+        },
+        {
+            "name": "ownerModified",
+            "type": "TIMESTAMP"
+        },
+        {
+            "name": "dateCreated",
+            "type": "TIMESTAMP"
+        },
+        {
+            "name": "dateModified",
+            "type": "TIMESTAMP"
+        }
+    ]
+}

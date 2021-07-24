@@ -1,0 +1,47 @@
+{
+    "keys": {
+        "p_key": [
+            "id",
+            "lead_id"
+        ],
+        "incre_key": "statusUpdated"
+    },
+    "schema": [
+        {
+            "name": "id",
+            "type": "INTEGER"
+        },
+        {
+            "name": "name",
+            "type": "STRING"
+        },
+        {
+            "name": "abbreviation",
+            "type": "STRING"
+        },
+        {
+            "name": "active",
+            "type": "BOOLEAN"
+        },
+        {
+            "name": "changedByUserId",
+            "type": "STRING"
+        },
+        {
+            "name": "statusUpdated",
+            "type": "TIMESTAMP"
+        },
+        {
+            "name": "leadCreated",
+            "type": "TIMESTAMP"
+        },
+        {
+            "name": "leadModified",
+            "type": "TIMESTAMP"
+        },
+        {
+            "name": "lead_id",
+            "type": "INTEGER"
+        }
+    ]
+}

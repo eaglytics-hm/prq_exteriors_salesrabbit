@@ -1,0 +1,20 @@
+CREATE
+OR REPLACE TABLE `{{ dataset }}`.`{{ table }}` AS
+SELECT
+    *
+EXCEPT
+    (row_num)
+FROM
+    (
+        SELECT
+            *,
+            ROW_NUMBER() over (
+                PARTITION BY {{ p_key }}
+                ORDER BY
+                    {{ incre_key }} DESC
+            ) AS row_num
+        FROM
+            `{{ dataset }}._stage_{{ table }}`
+    )
+WHERE
+    row_num = 1
