@@ -45,7 +45,9 @@ class SalesRabbit(metaclass=ABCMeta):
         else:
             template = TEMPLATE_ENV.get_template("read_max_incre.sql.j2")
             rendered_query = template.render(
-                incre_key=self.keys["incre_key"], dataset=DATASET, table=self.table
+                incre_key=self.keys["incre_key"],
+                dataset=DATASET,
+                table=self.table,
             )
             results = BQ_CLIENT.query(rendered_query).result()
             row = [dict(row.items()) for row in results][0]
@@ -63,13 +65,28 @@ class SalesRabbit(metaclass=ABCMeta):
 
     def get(self):
         endpoint = self._get_endpoint()
-        headers = {**HEADERS, **{"If-Modified-Since": self.start}}
+        headers = {
+            **HEADERS,
+            **{
+                "If-Modified-Since": self.start,
+            },
+        }
         url = f"{BASE_URL}/{endpoint}"
-        params = {"perPage": 2000, "page": 1}
+        params = {
+            "perPage": 2000,
+            "page": 1,
+        }
         rows = []
         with requests.Session() as session:
             while True:
-                with session.get(url, params=params, headers=headers) as r:
+                with session.get(
+                    url,
+                    params=params,
+                    headers=headers,
+                ) as r:
+                    r
+                    if r.status_code == 304:
+                        return []
                     res = r.json()
                 rows.extend([res["data"]])
                 more_pages = res["meta"]["morePages"]
@@ -85,7 +102,6 @@ class SalesRabbit(metaclass=ABCMeta):
 
     def transform(self, _rows):
         rows = self._transform(_rows)
-        self.num_processed = len(rows)
         return rows
 
     @abstractmethod
@@ -93,9 +109,6 @@ class SalesRabbit(metaclass=ABCMeta):
         raise NotImplementedError
 
     def load(self, rows):
-        # with open(f"{self.table}.json", "w") as f:
-        #     json.dump(rows, f)
-
         return BQ_CLIENT.load_table_from_json(
             rows,
             f"{DATASET}._stage_{self.table}",
@@ -121,6 +134,7 @@ class SalesRabbit(metaclass=ABCMeta):
         responses = {
             "table": self.table,
             "start": self.start,
+            "num_processed": len(rows),
         }
         if len(rows) > 0:
             rows = self.transform(rows)
@@ -146,7 +160,10 @@ class LeadStatusHistories(SalesRabbit):
 
     def _transform(self, _rows):
         rows = [
-            {**i, "lead_id": int(k)}
+            {
+                **i,
+                "lead_id": int(k),
+            }
             for page in _rows
             for k, v in page.items()
             for i in v
@@ -167,6 +184,9 @@ class Leads(SalesRabbit):
     def _transform(self, rows):
         rows = [item for sublist in rows for item in sublist]
         for row in rows:
-            for field in ["customFields", "integrationData"]:
+            for field in [
+                "customFields",
+                "integrationData",
+            ]:
                 row[field] = json.dumps(row[field])
         return rows

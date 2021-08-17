@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 requests = "*"
 google-cloud-bigquery = "*"
-aiohttp = "*"
 jinja2 = "*"
 google-cloud-pubsub = "*"
 

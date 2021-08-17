@@ -5,7 +5,9 @@ from .utils import encode_data
 
 
 def test_broadcast():
-    data = {"broadcast": "lead"}
+    data = {
+        "broadcast": "lead",
+    }
     message = encode_data(data)
     req = Mock(get_json=Mock(return_value=message), args=message)
     res = main(req)

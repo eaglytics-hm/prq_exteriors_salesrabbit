@@ -13,12 +13,18 @@ def main(request):
     print(data)
 
     if data:
-        if 'broadcast' in data:
+        if "broadcast" in data:
             results = broadcast(data)
         else:
-            results = SalesRabbit.factory(data["table"], data.get("start")).run()
+            results = SalesRabbit.factory(
+                data["table"],
+                data.get("start"),
+            ).run()
 
-        responses = {"pipelines": "SalesRabbit", "results": results}
+        responses = {
+            "pipelines": "SalesRabbit",
+            "results": results,
+        }
         print(responses)
         return responses
     else:
